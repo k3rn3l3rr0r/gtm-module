@@ -1,0 +1,4 @@
+<ul class="nav nav-tabs" id="myTab">
+  <li {if $active == "settings"}class="active"{/if}><a class="ajax settingsTab" n:href="Settings:default idPage => $idPage">{_'Settings'}</a></li>
+  {include ../../../webcms2/AdminModule/templates/system/boxes.latte id => $idPage}
+</ul>
