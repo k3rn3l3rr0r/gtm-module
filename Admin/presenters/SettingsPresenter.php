@@ -1,6 +1,6 @@
 <?php
 
-    namespace AdminModule\FormModule;
+    namespace AdminModule\GtmModule;
 
     use Nette;
 
@@ -27,10 +27,10 @@
 	    
 	}
 
-	public function createComponentSettingsForm() {
+	public function createComponentSettingsGtm() {
 
 	    $settings = array();
-	    $settings[] = $this->settings->get('Test', 'gtmModule' . $this->actualPage->getId(), 'text');
+	    $settings[] = $this->settings->get('Container Number', 'gtmModule' . $this->actualPage->getId(), 'text');
 
 	    return $this->createSettingsForm($settings);
 	}
