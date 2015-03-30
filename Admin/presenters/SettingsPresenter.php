@@ -2,7 +2,7 @@
 
     namespace AdminModule\GtmModule;
 
-    use Nette;
+    //use Nette;
 
     /**
      * Description of SettingsPresenter
@@ -36,10 +36,10 @@
 	}
 
 	public function renderDefault($idPage) {
-	    $this->reloadContent();
+	    //$this->reloadContent();
 
-	    $this->template->config = $this->settings->getSection('gtmModule');
-	    $this->template->idPage = $idPage;
+	    //$this->template->config = $this->settings->getSection('gtmModule');
+	    //$this->template->idPage = $idPage;
 	}
 
     }

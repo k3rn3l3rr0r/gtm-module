@@ -26,9 +26,11 @@ class BasePresenter extends \AdminModule\BasePresenter {
 
 	}
 	
+	/*
 	public function renderDefault($idPage){
 		$this->reloadContent();
 		
 		$this->template->idPage = $idPage;
 	}
+	*/
 }
