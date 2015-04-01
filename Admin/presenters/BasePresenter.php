@@ -3,34 +3,33 @@
 namespace AdminModule\GtmModule;
 
 /**
- * Description of BasePresenter
+ * Description of BasePresenter.
  *
  * @author Josef Sukdol <josef.sukdol at gmail.com>
  */
-class BasePresenter extends \AdminModule\BasePresenter {
-	
-	protected $repository;
-	
-	protected function startup() {
-		parent::startup();
-		
-		//$this->repository = $this->em->getRepository('WebCMS\FormModule\Entity\Entry');
-	}
+class BasePresenter extends \AdminModule\BasePresenter
+{
+    protected $repository;
 
-	protected function beforeRender() {
-		parent::beforeRender();
-		
-	}
-	
-	public function actionDefault($idPage){
+    protected function startup()
+    {
+        parent::startup();
 
-	}
-	
-	/*
-	public function renderDefault($idPage){
-		$this->reloadContent();
-		
-		$this->template->idPage = $idPage;
-	}
-	*/
+        //$this->repository = $this->em->getRepository('WebCMS\FormModule\Entity\Entry');
+    }
+
+    protected function beforeRender()
+    {
+        parent::beforeRender();
+    }
+
+    public function actionDefault($idPage)
+    {
+    }
+
+    public function renderDefault($idPage){
+        $this->reloadContent();
+
+        $this->template->idPage = $idPage;
+    }
 }
