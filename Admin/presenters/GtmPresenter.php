@@ -29,7 +29,18 @@ class GtmPresenter extends BasePresenter
     {
         $this->reloadContent();
 
+        $this->template->settingsPreview = $this->getSettingsForPreview();
         $this->template->idPage = $idPage;
+    }
+
+    protected function getSettingsForPreview()
+    {
+        $settings = array();
+        $settings['Container Number'] = $this->settings->get('Container Number', 'gtmModule'.$this->actualPage->getId(), 'text')->getValue();
+        $settings['Main head script'] = $this->settings->get('Main head script', 'gtmModule'.$this->actualPage->getId(), 'textarea')->getValue();
+        $settings['Main body script'] = $this->settings->get('Main body script', 'gtmModule'.$this->actualPage->getId(), 'textarea')->getValue();
+
+        return $settings;
     }
 
     /*

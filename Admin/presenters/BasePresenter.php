@@ -15,7 +15,7 @@ class BasePresenter extends \AdminModule\BasePresenter
     {
         parent::startup();
 
-        //$this->repository = $this->em->getRepository('WebCMS\FormModule\Entity\Entry');
+        //$this->repository = $this->em->getRepository('WebCMS\FormModule\Entity\GtmSomething');
     }
 
     protected function beforeRender()
@@ -27,7 +27,8 @@ class BasePresenter extends \AdminModule\BasePresenter
     {
     }
 
-    public function renderDefault($idPage){
+    public function renderDefault($idPage)
+    {
         $this->reloadContent();
 
         $this->template->idPage = $idPage;

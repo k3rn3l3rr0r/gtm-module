@@ -1,0 +1,26 @@
+{block content}
+	
+	<div class="page-heading">	
+		<h1>{$actualPage->getTitle()}</h1>
+		{include ../tabs.latte active => 'gtm'}
+	</div>
+	
+	<br>
+	<div class="row control-group">
+		<h3>{_'Google Tag Manager module dashboard'}</h3>
+	</div>
+	<!--
+	<div class="row control-group">
+		<a class="btn btn-primary ajax" n:href="updateSlide idPage => $actualPage->getId()">{_'Add slide'}</a>
+	</div>
+	-->
+
+	{foreach $settingsPreview as $key => $val}
+		<div class="row control-group">
+			<h4>{$key}</h4>
+			<div class="row control-group">{$val}</div>
+		</div>
+	{/foreach}	
+		
+	
+{/block}

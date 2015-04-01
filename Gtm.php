@@ -31,6 +31,6 @@ class Gtm extends \WebCMS\Module
 
     public function __construct()
     {
-        $this->addBox('Gtm box', 'Gtm', 'gtmBox');
+        $this->addBox('Gtm body box', 'Gtm', 'gtmBox');
     }
 }

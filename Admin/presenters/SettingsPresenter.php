@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AdminModule\GtmModule;
 
 //use Nette;
@@ -32,6 +31,8 @@ namespace AdminModule\GtmModule;
         {
             $settings = array();
             $settings[] = $this->settings->get('Container Number', 'gtmModule'.$this->actualPage->getId(), 'text');
+            $settings[] = $this->settings->get('Main head script', 'gtmModule'.$this->actualPage->getId(), 'textarea');
+            $settings[] = $this->settings->get('Main body script', 'gtmModule'.$this->actualPage->getId(), 'textarea');
 
             return $this->createSettingsForm($settings);
         }
