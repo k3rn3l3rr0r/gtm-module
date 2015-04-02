@@ -36,19 +36,6 @@ class GtmPresenter extends BasePresenter
         $this->template->idPage = $idPage;
     }
 
-    public function rewriteScriptVariables ($vars = array(), $script)
-    {
-        if (array_count_values($vars) > 0){
-            foreach ($vars as $key => $val) {
-                for ($i = substr_count($script, $key); $i > 0; $i--) {
-                    $script = \WebCMS\Helpers\SystemHelper::strlReplace($key, $val, $script);
-                }
-            }
-        }
-
-        return $script;
-    }
-
     public function getSettingsForPreview()
     {
         $mainHeadVars = array();
@@ -68,5 +55,18 @@ class GtmPresenter extends BasePresenter
         $settings['rewritten']['Main body script'] = $this->rewriteScriptVariables($mainBodyVars, $mainBodyScript);
 
         return $settings;
+    }
+
+    public static function rewriteScriptVariables ($vars = array(), $script)
+    {
+        if (array_count_values($vars) > 0){
+            foreach ($vars as $key => $val) {
+                for ($i = substr_count($script, $key); $i > 0; $i--) {
+                    $script = \WebCMS\Helpers\SystemHelper::strlReplace($key, $val, $script);
+                }
+            }
+        }
+
+        return $script;
     }
 }
