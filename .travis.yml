@@ -1,5 +1,7 @@
 language: php
 
+sudo: true
+
 php:
   - 5.4
   - 5.5
