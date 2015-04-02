@@ -29,65 +29,44 @@ class GtmPresenter extends BasePresenter
     {
         $this->reloadContent();
 
-        $this->template->settingsPreview = $this->getSettingsForPreview();
+        $settingsPreview = $this->getSettingsForPreview();
+
+        $this->template->settingsPreviewOrig = $settingsPreview['original'];
+        $this->template->settingsPreviewRewrite = $settingsPreview['rewritten'];
         $this->template->idPage = $idPage;
     }
 
-    protected function getSettingsForPreview()
+    public function rewriteScriptVariables ($vars = array(), $script)
     {
+        if (array_count_values($vars) > 0){
+            foreach ($vars as $key => $val) {
+                for ($i = substr_count($script, $key); $i > 0; $i--) {
+                    $script = \WebCMS\Helpers\SystemHelper::strlReplace($key, $val, $script);
+                }
+            }
+        }
+
+        return $script;
+    }
+
+    public function getSettingsForPreview()
+    {
+        $mainHeadVars = array();
+        $mainHeadVars['%device%'] = 'desktop';
+        $mainHeadVars['%response%'] = '200';
+
+        $mainBodyVars = array();
+        $mainBodyVars['%container%'] = $this->settings->get('Container Number', 'gtmModule'.$this->actualPage->getId(), 'text')->getValue();        
+
+        $mainHeadScript = $this->settings->get('Main head script', 'gtmModule'.$this->actualPage->getId(), 'textarea')->getValue();
+        $mainBodyScript = $this->settings->get('Main body script', 'gtmModule'.$this->actualPage->getId(), 'textarea')->getValue();
+
         $settings = array();
-        $settings['Container Number'] = $this->settings->get('Container Number', 'gtmModule'.$this->actualPage->getId(), 'text')->getValue();
-        $settings['Main head script'] = $this->settings->get('Main head script', 'gtmModule'.$this->actualPage->getId(), 'textarea')->getValue();
-        $settings['Main body script'] = $this->settings->get('Main body script', 'gtmModule'.$this->actualPage->getId(), 'textarea')->getValue();
+        $settings['original']['Main head script'] = $mainHeadScript;
+        $settings['original']['Main body script'] = $mainBodyScript;
+        $settings['rewritten']['Main head script'] = $this->rewriteScriptVariables($mainHeadVars, $mainHeadScript);
+        $settings['rewritten']['Main body script'] = $this->rewriteScriptVariables($mainBodyVars, $mainBodyScript);
 
         return $settings;
     }
-
-    /*
-    protected function createComponentEntryGrid($name)
-    {
-        $grid = $this->createGrid($this, $name, 'WebCMS\FormModule\Entity\Entry', array(
-            array('by' => 'date', 'dir' => 'DESC')
-            ),
-            array(
-                'page = ' . $this->actualPage->getId()
-            )
-        );
-
-        $grid->addColumnDate('date', 'Entry date')->setCustomRender(function($item){
-            return $item->getDate()->format('d.m.Y H:i:s');
-        })->setFilterDate();
-
-        $grid->addActionHref("viewEntry", 'View', 'viewEntry', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-primary', 'ajax')));
-        $grid->addActionHref("deleteEntry", 'Delete', 'deleteEntry', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-danger'), 'data-confirm' => 'Are you sure you want to delete this item?'));
-
-        return $grid;
-    }
-
-    public function actionViewEntry($id, $idPage)
-    {
-        $this->reloadContent();
-
-        $this->entry = $this->repository->find($id);
-    }
-
-    public function renderViewEntry($idPage)
-    {
-        $this->template->entry = $this->entry;
-        $this->template->idPage = $idPage;
-    }
-
-    public function actionDeleteEntry($id, $idPage)
-    {
-        $this->entry = $this->repository->find($id);
-
-        $this->em->remove($this->entry);
-        $this->em->flush();
-
-        $this->flashMessage('Entry has been removed.', 'success');
-        $this->redirect('default', array(
-            'idPage' => $this->actualPage->getId()
-        ));
-    }
-    */
 }

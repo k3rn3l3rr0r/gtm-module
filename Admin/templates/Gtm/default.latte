@@ -8,19 +8,62 @@
 	<br>
 	<div class="row control-group">
 		<h3>{_'Google Tag Manager module dashboard'}</h3>
-	</div>
-	<!--
-	<div class="row control-group">
-		<a class="btn btn-primary ajax" n:href="updateSlide idPage => $actualPage->getId()">{_'Add slide'}</a>
-	</div>
-	-->
 
-	{foreach $settingsPreview as $key => $val}
 		<div class="row control-group">
-			<h4>{$key}</h4>
-			<div class="row control-group">{$val}</div>
+			<h4>{_'Module settings preview'}</h4>
+			<div class="row control-group">
+				<label for="prev-switch">{_'Show rewrite example'}</label>
+				<input type="checkbox" name="prev-switch" class="jq_prev_switch"/>
+			</div>
 		</div>
-	{/foreach}	
-		
-	
+			
+		<div class="row control-group jq_prev_orig">
+			{foreach $settingsPreviewOrig as $key => $val}
+				<div class="row control-group">
+					<h5>{$key}</h5>
+					<div class="row control-group">
+						<pre>{$val}</pre>
+					</div>
+				</div>
+			{/foreach}	
+
+			<div class="row control-group">
+				<p>{_'The variables in the scripts shown above will be rewritten as follows:'}</p>
+				<div class="row control-group">
+					<ul>
+						<li><strong>%device%</strong> - {_'desktop / mobile / tablet detected depending on the viewport settings (default fallback is desktop)'}</li>
+						<li><strong>%response%</strong> - {_'the server response code (200 / 404 / 403 etc.)'}</li>
+						<li><strong>%container%</strong> - {_'the Google Tag Manager container number'}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row control-group jq_prev_rewrite hidden">
+			{foreach $settingsPreviewRewrite as $key => $val}
+				<div class="row control-group">
+					<h5>{$key}</h5>
+					<div class="row control-group">
+						<pre>{$val}</pre>
+					</div>
+				</div>
+			{/foreach}	
+		</div>
+
+	</div>	
+
+	<script>
+		$(document).on('change', '.jq_prev_switch', function(){
+	        
+	        if ($(this).is(':checked')) {
+	            $('.jq_prev_orig').addClass('hidden');
+	            $('.jq_prev_rewrite').removeClass('hidden');
+	        } else {
+	            $('.jq_prev_rewrite').addClass('hidden');
+	            $('.jq_prev_orig').removeClass('hidden');
+	        }
+
+		});
+	</script>
+
 {/block}

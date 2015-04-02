@@ -14,8 +14,6 @@ class BasePresenter extends \AdminModule\BasePresenter
     protected function startup()
     {
         parent::startup();
-
-        //$this->repository = $this->em->getRepository('WebCMS\FormModule\Entity\GtmSomething');
     }
 
     protected function beforeRender()
