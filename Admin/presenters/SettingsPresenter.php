@@ -33,6 +33,7 @@ namespace AdminModule\GtmModule;
             $settings[] = $this->settings->get('Container Number', 'gtmModule'.$this->actualPage->getId(), 'text');
             $settings[] = $this->settings->get('Main head script', 'gtmModule'.$this->actualPage->getId(), 'textarea');
             $settings[] = $this->settings->get('Main body script', 'gtmModule'.$this->actualPage->getId(), 'textarea');
+            $settings[] = $this->settings->get('Track responsive layout', 'gtmModule'.$this->actualPage->getId(), 'checkbox');
 
             return $this->createSettingsForm($settings);
         }
